@@ -21,7 +21,7 @@ export const renderFoodEntrySection = (foodEntries) => {
       </ScrollView>
     );
   }
-  
+
   return (
     <View style={foodDiaryStyles.textBoxContainer}>
       <Text style={foodDiaryStyles.textBoxText}>No food logs for today</Text>
@@ -71,7 +71,7 @@ export const renderMedicationRecommendation = (
       <MedicationRecommendation
         medicationName={medicationName}
         consumptionPeriod={consumptionPeriod}
-        units={units}
+        units={Math.round(units)}
       />
     );
   }

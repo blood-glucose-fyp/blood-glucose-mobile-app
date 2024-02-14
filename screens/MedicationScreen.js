@@ -13,52 +13,9 @@ import { getMedicationList } from "../hooks/apiHooks";
 import Spinner from "../components/spinner";
 
 const MedicationScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-
-  console.log(`Retrieving medication list for: ${id} ${timestamp}`);
-  const { medicationList, loading, error, refresh } = getMedicationList(
-    id,
-    navigation
-  );
-  const timestamp = new Date();
-
-  const displayMedicationList = (medicationList) => {
-    if (medicationList.length === 0) {
-      return (
-        <View style={styles.emptyMedicationListContainer}>
-          <Text style={styles.emptyMedicationListText}>
-            You currently have no medications in your list.
-          </Text>
-
-          <Text></Text>
-
-          <Text style={styles.emptyMedicationListText}>
-            Please add a new one by clicking the button below.
-          </Text>
-        </View>
-      );
-    }
-
-    return medicationList?.map(({ medicationName, dosage, time }) => (
-      <MedicationContainer
-        key={medicationName}
-        medicationName={medicationName}
-        consumptionPeriod={time}
-        dosage={dosage}
-        navigation={navigation}
-        id={id}
-      />
-    ));
-  };
-
-  if (loading) {
-    return <Spinner />;
-  }
-
-  console.log(medicationList);
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View
           style={{
@@ -73,12 +30,10 @@ const MedicationScreen = ({ navigation, route }) => {
 
           <View style={{ marginVertical: 10 }}></View>
 
-          <TouchableOpacity style={styles.pillContainer} onPress={refresh}>
+          <TouchableOpacity style={styles.pillContainer}>
             <Fontisto name="pills" size={80} color="#3B83D1" />
           </TouchableOpacity>
         </View>
-
-        {displayMedicationList(medicationList)}
 
         <TextButton
           text="Add Medication"
@@ -86,7 +41,7 @@ const MedicationScreen = ({ navigation, route }) => {
           maybeFontWeight="600"
           maybeButtonWidth={220}
           onPress={() => {
-            navigation.navigate("AddMedication", { id: id });
+            navigation.navigate("AddMedication");
           }}
         />
 

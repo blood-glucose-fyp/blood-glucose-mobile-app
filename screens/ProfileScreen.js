@@ -5,31 +5,19 @@ import TextButton from "../components/touchable/textButton";
 import Spinner from "../components/spinner";
 
 const ProfileScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-  const [assets, setAssets] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  console.log(`Retrieving ProfileAssets for: ${id}`);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/api/profile/${id}`);
-        const assets = await response.json();
-        setLoading(false);
-        setAssets(assets);
-      } catch (error) {
-        console.error("Error fetching profile assets: ", error);
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return <Spinner />;
-  }
+  const assets = {
+    firstName: "John",
+    lastName: "Doe",
+    age: 25,
+    diabetesType: "Type 1",
+    weightKg: 65,
+    heightCm: 170,
+    caloricGoalKcal: 2000,
+    hypoMgDl: 100,
+    targetLowerMgDl: 110,
+    targetUpperMgDl: 130,
+    hyperMgDl: 150,
+  };
 
   const firstName = assets?.firstName;
   const lastName = assets?.lastName;
@@ -44,7 +32,7 @@ const ProfileScreen = ({ navigation, route }) => {
   const hyper = assets?.hyperMgDl;
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.topTextContainer}>
           <Text style={styles.nameText}>

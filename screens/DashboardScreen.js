@@ -13,12 +13,24 @@ import { getDashboardAssets } from "../hooks/apiHooks";
 import Spinner from "../components/spinner";
 
 const DashboardScreen = ({ route, navigation }) => {
-  const { id } = route.params;
-  const { dashboardData, loading } = getDashboardAssets(id, navigation);
+  // const { id } = route.params;
+  // const { dashboardData, loading } = getDashboardAssets(id, navigation);
 
-  if (loading) {
-    return <Spinner />;
-  }
+  const dashboardData = {
+    calorieDisplayAssets: {
+      calGoal: 2500,
+      calEaten: 0,
+      calLeft: 2500,
+      dailyProgress: 0,
+      consumptionHistory: [],
+    },
+    bloodGlucoseDisplayAssets: {
+      latestMeasurement: 0,
+      previousMeasurement: 0,
+      averageMeasurement: 0,
+      measurementHistory: [],
+    },
+  };
 
   const calorieDisplayAssets = dashboardData?.calorieDisplayAssets || {};
   const bloodGlucoseDisplayAssets =
@@ -40,7 +52,7 @@ const DashboardScreen = ({ route, navigation }) => {
   };
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.mainHeaderContainer}>
           <Text style={styles.mainHeaderText}>Dashboard</Text>
@@ -49,9 +61,7 @@ const DashboardScreen = ({ route, navigation }) => {
 
         <TouchableOpacity
           style={styles.component}
-          onPress={() =>
-            navigation.navigate("NutritionalDetailsChart", { id: id })
-          }
+          onPress={() => navigation.navigate("NutritionalDetailsChart")}
         >
           {calorieDisplayAssets && (
             <CalorieContainer data={calorieDisplayAssets} />
@@ -60,7 +70,7 @@ const DashboardScreen = ({ route, navigation }) => {
 
         <TouchableOpacity
           style={styles.component}
-          onPress={() => navigation.navigate("BloodGlucoseChart", { id: id })}
+          onPress={() => navigation.navigate("BloodGlucoseChart")}
         >
           {bloodGlucoseDisplayAssets && (
             <GlucoseContainer data={bloodGlucoseDisplayAssets} />

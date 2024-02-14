@@ -11,7 +11,6 @@ import CommonLayout from "../CommonLayout";
 import InputBox from "../../components/inputBox";
 
 const NewFoodEntryScreen = ({ navigation, route }) => {
-  const { id } = route.params;
   const [userInput, setUserInput] = useState("");
   const [matchedFoods, setMatchedFoods] = useState([]);
   const [showList, setShowList] = useState(false);
@@ -45,11 +44,11 @@ const NewFoodEntryScreen = ({ navigation, route }) => {
     setUserInput(food);
     setShowList(false);
     setMatchedFoods([]);
-    navigation.navigate("FoodEntrySummary", { id: id });
+    navigation.navigate("FoodEntrySummary");
   };
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <InputBox
         placeholder="Search for food"
         width="90%"

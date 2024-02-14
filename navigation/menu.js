@@ -8,9 +8,9 @@ import {
 } from "@expo/vector-icons";
 import React from "react";
 
-const Menu = ({ isVisible, onClose, navigation, id }) => {
+const Menu = ({ isVisible, onClose, navigation }) => {
   const navigateAndClose = (screenName) => {
-    navigation.navigate(screenName, { id: id });
+    navigation.navigate(screenName);
     onClose();
   };
   return (

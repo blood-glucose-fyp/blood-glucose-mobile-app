@@ -4,8 +4,6 @@ import ClickableText from "../components/touchable/clickableText";
 import TextButton from "../components/touchable/textButton";
 
 const HealthcareProviderScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-
   const healthcareProvider = "National University Hospital (NUH)";
   const healthcareProviderAddress = "5 Lower Kent Ridge Rd";
   const healthcareProviderContact = "69082222";
@@ -14,7 +12,7 @@ const HealthcareProviderScreen = ({ navigation, route }) => {
   const doctorEmail = "sarahlim@doctor.com";
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.mainHeaderRow}>
           <Text style={styles.mainHeaderText}>Healthcare Provider</Text>

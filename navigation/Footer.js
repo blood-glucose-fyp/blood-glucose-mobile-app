@@ -4,7 +4,7 @@ import React from "react";
 import { MaterialCommunityIcons, Ionicons, Feather } from "@expo/vector-icons";
 import Menu from "./menu";
 
-const Footer = ({ navigation, id }) => {
+const Footer = ({ navigation }) => {
   const [isMenuVisible, setMenuVisible] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const Footer = ({ navigation, id }) => {
       <View style={styles.mainContainer}>
         <TouchableOpacity
           style={styles.iconContainer}
-          onPress={() => navigation.navigate("Dashboard", { id: id })}
+          onPress={() => navigation.navigate("Dashboard")}
         >
           <MaterialCommunityIcons
             name="view-dashboard-outline"
@@ -29,9 +29,7 @@ const Footer = ({ navigation, id }) => {
           <Feather name="plus" size={40} color="#F8F9FB" />
         </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Profile", { id: id })}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Ionicons name="person-outline" size={50} color="#3B83D1" />
           <Text style={styles.iconText}>Profile</Text>
         </TouchableOpacity>
@@ -41,7 +39,6 @@ const Footer = ({ navigation, id }) => {
         isVisible={isMenuVisible}
         onClose={() => setMenuVisible(false)}
         navigation={navigation}
-        id={id}
       />
     </View>
   );

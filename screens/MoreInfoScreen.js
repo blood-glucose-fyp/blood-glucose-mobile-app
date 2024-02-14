@@ -271,7 +271,6 @@ const Events = () => {
 };
 
 const MoreInfoScreen = ({ navigation, route }) => {
-  const { id } = route.params;
   const [selectedHeader, setSelectedHeader] = useState("Hypoglycemia");
   const headers = [
     "Hypoglycemia",
@@ -300,7 +299,7 @@ const MoreInfoScreen = ({ navigation, route }) => {
   };
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.mainHeaderContainer}>
           <Text style={styles.mainHeaderText}>More Information</Text>

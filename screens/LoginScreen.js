@@ -9,34 +9,34 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState(null);
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+  // const handleLogin = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:8000/api/login", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         email,
+  //         password,
+  //       }),
+  //     });
 
-      if (response.ok) {
-        const userId = await response.json();
-        setUserId(userId);
-        console.log(`User ${userId} has successfully logged in`);
+  //     if (response.ok) {
+  //       const userId = await response.json();
+  //       setUserId(userId);
+  //       console.log(`User ${userId} has successfully logged in`);
 
-        navigation.navigate("Dashboard", {
-          id: userId,
-        });
-      } else {
-        console.error("Login failed");
-      }
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    }
-  };
+  //       navigation.navigate("Dashboard", {
+  //         id: userId,
+  //       });
+  //     } else {
+  //       console.error("Login failed");
+  //     }
+  //   } catch (error) {
+  //     console.error(`Error: ${error}`);
+  //   }
+  // };
 
   return (
     <SafeAreaView style={styles.mainContainer}>
@@ -80,7 +80,12 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ flex: 1 }}></View>
 
         <View>
-          <TextButton text="Log In" onPress={handleLogin} />
+          <TextButton
+            text="Log In"
+            onPress={() => {
+              navigation.navigate("Dashboard");
+            }}
+          />
           <View style={styles.smallTextContainer}>
             <Text style={styles.smallText}>Don't have an account?</Text>
             <Text> </Text>

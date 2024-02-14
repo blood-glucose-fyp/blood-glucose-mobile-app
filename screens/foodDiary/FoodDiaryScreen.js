@@ -11,7 +11,6 @@ import { displayFoodTip } from "../../hooks/commonHooks";
 import { renderFoodEntrySection } from "../../hooks/foodDiaryHooks";
 
 const FoodDiaryScreen = ({ navigation, route }) => {
-  const { id } = route.params;
   const foodEntries = [
     // {
     //   foodName: "Chicken",
@@ -32,7 +31,7 @@ const FoodDiaryScreen = ({ navigation, route }) => {
   ];
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.mainHeaderContainer}>
           <Text style={styles.mainHeaderText}>Food Diary</Text>
@@ -48,7 +47,7 @@ const FoodDiaryScreen = ({ navigation, route }) => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.foodEntrybutton}
-            onPress={() => navigation.navigate("NewFoodEntry", { id: id })}
+            onPress={() => navigation.navigate("NewFoodEntry")}
           >
             <FontAwesome name="pencil-square-o" size={60} color="#ffffff" />
             <Text style={styles.buttonText}>New</Text>

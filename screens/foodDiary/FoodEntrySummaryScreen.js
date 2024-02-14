@@ -16,35 +16,15 @@ import {
 import MedicationRecommendation from "../../components/medicationRecommendation";
 
 const FoodEntrySummaryScreen = ({ navigation, route }) => {
-  const { id } = route.params;
   const [servingSize, setServingSize] = useState(0);
-  const [foodDetails, setFoodDetails] = useState(null);
-  const foodName = "Fried Kway Teow";
+  const foodName = "Chicken Rice";
+  const foodDetails = {};
 
-  useEffect(() => {
-    const fetchNutritionalContent = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:8000/api/food/nutritional-content/Fried%20Kway%20Teow`
-        );
-
-        const content = await response.json();
-
-        console.log(content);
-        setFoodDetails(content);
-      } catch (error) {
-        console.error("Error fetching nutritional content:", error.message);
-      }
-    };
-
-    fetchNutritionalContent();
-  }, []);
-
-  const calories = foodDetails?.calories || 0;
-  const carbs = foodDetails?.carbohydrates || 0;
-  const fat = foodDetails?.fat || 0;
-  const sodium = foodDetails?.sodium || 0;
-  const fiber = foodDetails?.fiber || 0;
+  const calories = 525;
+  const carbs = 64;
+  const fat = 8;
+  const fiber = 2;
+  const protein = 22;
 
   const {
     calculatedCalories,
@@ -58,7 +38,7 @@ const FoodEntrySummaryScreen = ({ navigation, route }) => {
     calories,
     carbs,
     fat,
-    sodium,
+    protein,
     fiber
   );
 
@@ -74,40 +54,8 @@ const FoodEntrySummaryScreen = ({ navigation, route }) => {
     mealType = "dinner";
   }
 
-  const handleClick = async () => {
-    const reqBody = {
-      userId: id,
-      foodName: foodName,
-      timestamp: timestamp,
-      portionSize: servingSize,
-      mealType: mealType,
-      mealDescription: "",
-    };
-
-    try {
-      const response = await fetch("http://localhost:8000/api/food/new-entry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reqBody),
-      });
-
-      if (response.ok) {
-        const newId = await response.json();
-        console.log(`Glucose entry has been created: ${newId}`);
-
-        navigation.navigate("Dashboard", { id: id });
-      } else {
-        console.error("Glucose entry creation failed");
-      }
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    }
-  };
-
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer} key="food-entry-summary">
         <View
           style={{
@@ -170,7 +118,7 @@ const FoodEntrySummaryScreen = ({ navigation, route }) => {
               <View style={{ marginTop: 5, paddingHorizontal: 32 }}>
                 <TouchableOpacity
                   style={styles.rowContainer}
-                  onPress={handleClick}
+                  onPress={() => navigation.navigate("Dashboard")}
                 >
                   <View></View>
                   <FontAwesome5 name="check-circle" size={40} color="#3DD17B" />

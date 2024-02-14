@@ -8,9 +8,17 @@ import {
 import CommonLayout from "./CommonLayout";
 
 const SettingsScreen = ({ navigation, route }) => {
-  const { id } = route.params;
+  const profileEditAssets = {
+    firstName: "Sean",
+    lastName: "Marinas",
+    age: 25,
+    diabetesType: "Type 1",
+    weightKg: 65,
+    heightCm: 170,
+  };
+
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.row}>
           <Text style={styles.mainHeaderText}>Settings</Text>

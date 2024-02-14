@@ -8,43 +8,16 @@ import TextButton from "../components/touchable/textButton";
 import Spinner from "../components/spinner";
 
 const AnalysisScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-  const [assets, setAssets] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  console.log(`Retrieving AnalysisAssets ofr ${id}`);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await fetch(`http://localhost:8000/api/analysis/${id}`);
-      const data = await response.json();
-      setAssets(data);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching analysis assets:", error);
-      setLoading(false);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    const focusListener = navigation.addListener("focus", () => {
-      fetchData();
-    });
-
-    return () => {
-      focusListener();
-    };
-  }, [navigation, fetchData]);
-
-  if (loading) {
-    return <Spinner />;
-  }
+  const assets = {
+    caloricRangeIndex: 2,
+    bloodGlucoseRangeIndex: 2,
+  };
 
   const calorieRangeIndex = assets?.caloricRangeIndex;
   const bloodGlucoseRangeIndex = assets?.bloodGlucoseRangeIndex;
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View style={styles.mainHeaderContainer}>
           <Text style={styles.mainHeaderText}>Analysis</Text>

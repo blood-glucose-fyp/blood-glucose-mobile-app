@@ -8,8 +8,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { update } from "../hooks/apiHooks";
 
 const AddMedicationScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-
   const [timeOpen, setTimeOpen] = useState(false);
   const [timeValue, setTimeValue] = useState(null);
   const [medicationName, setMedicationName] = useState("");
@@ -47,11 +45,12 @@ const AddMedicationScreen = ({ navigation, route }) => {
       dosageLevel: dosageLevel,
       timeValue: timeValue,
     };
-    addMedication(id, medicationData, navigation);
-  };
+
+    navigation.navigate("Medication")
+  };    
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer}>
         <View
           style={{

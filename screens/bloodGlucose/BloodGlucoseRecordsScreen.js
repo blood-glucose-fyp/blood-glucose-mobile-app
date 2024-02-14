@@ -16,15 +16,12 @@ import { fetchTodaysBloodGlucoseRecords } from "../../hooks/apiHooks";
 import Spinner from "../../components/spinner";
 
 const BloodGlucoseRecordsScreen = ({ navigation, route }) => {
-  const { id } = route.params;
-  const { records, loading } = fetchTodaysBloodGlucoseRecords(id, navigation);
-
   const date = displayCurrentDate();
 
-  if (loading) return <Spinner />;
+  const records = [];
 
   return (
-    <CommonLayout navigation={navigation} id={id}>
+    <CommonLayout navigation={navigation}>
       <SafeAreaView style={styles.mainContainer} key="bg-records">
         <View
           style={{
@@ -66,9 +63,7 @@ const BloodGlucoseRecordsScreen = ({ navigation, route }) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() =>
-            navigation.navigate("NewBloodGlucoseRecord", { id: id })
-          }
+          onPress={() => navigation.navigate("NewBloodGlucoseRecord")}
         >
           <FontAwesome name="pencil-square-o" size={50} color="#ffffff" />
           <Text style={styles.buttonText}>New Records</Text>
