@@ -13,7 +13,6 @@ import { bloodGlucoseChartTexts } from "../../data";
 import Spinner from "../../components/spinner";
 
 const BloodGlucoseChartScreen = ({ navigation, route }) => {
-  const { id } = route.params;
   const headers = ["Day", "Week", "Month"];
   const highlightedColor = "#3B83D1";
   const [assets, setAssets] = useState(null);
@@ -97,10 +96,6 @@ const BloodGlucoseChartScreen = ({ navigation, route }) => {
   console.log(dayIndex);
   console.log(weekIndex);
   console.log(monthIndex);
-
-  if (loading) {
-    return <Spinner />;
-  }
 
   return (
     <CommonLayout navigation={navigation} id={id}>
